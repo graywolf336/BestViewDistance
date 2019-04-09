@@ -1,8 +1,8 @@
 name: BestViewDistance
-version: 11.9
+version: maven-version-number
 api-version: 1.13
 description: Best View Distance. Optimize your view distance.
-author: Lxct
+authors: [Lxct, graywolf336]
 softdepend: [ProtocolLib, PlaceholderAPI, WorldGuard]
 main: me.lxct.bestviewdistance.BestViewDistance
 
