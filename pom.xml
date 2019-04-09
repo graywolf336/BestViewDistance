@@ -219,4 +219,17 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<distributionManagement>
+		<repository>
+			<id>repo-release</id>
+			<name>Jail Releases</name>
+			<url>https://repo.craftyn.com/repository/internal/</url>
+		</repository>
+		<snapshotRepository>
+			<id>repo-snapshot</id>
+			<name>Jail Snapshots</name>
+			<url>https://repo.craftyn.com/repository/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
 </project>
