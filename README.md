@@ -1,8 +1,5 @@
-# BestViewDistance
-A view distance plugin for Paper. Created to boost ping/tps and view distance.
-
-Dev Builds: [https://ci.craftyn.com/job/BestViewDistance/](https://ci.craftyn.com/job/BestViewDistance/)
-[![Build Status](https://ci.craftyn.com/job/BestViewDistance/badge/icon)](https://ci.craftyn.com/job/BestViewDistance/)
+# BestViewDistance [![Build Status](https://ci.craftyn.com/job/BestViewDistance/badge/icon)](https://ci.craftyn.com/job/BestViewDistance/)
+A view distance plugin for Paper. Created to boost ping/tps and view distance. [Development Builds](https://ci.craftyn.com/job/BestViewDistance/)
 
 ## How it works ?
 This plugin chooses the **best view distance for your players**.
