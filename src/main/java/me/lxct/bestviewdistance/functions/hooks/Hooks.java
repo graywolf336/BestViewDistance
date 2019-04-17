@@ -30,7 +30,7 @@ public class Hooks {
         // WORLDGUARD
         if (Bukkit.getPluginManager().getPlugin("WorldGuard") != null) {
             try {
-                new PlaceholderAPIHook(plugin).hook();
+                WorldGuardHook.isEnabled = true;
                 Bukkit.getLogger().info("[BestViewDistance] Successfully hooked into WorldGuard!");
             } catch (NoClassDefFoundError ignored) {
             }

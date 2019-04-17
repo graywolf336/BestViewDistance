@@ -1,16 +1,14 @@
 package me.lxct.bestviewdistance.functions;
 
-import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import me.lxct.bestviewdistance.BestViewDistance;
+import me.lxct.bestviewdistance.functions.hooks.WorldGuardHook;
 import me.lxct.bestviewdistance.functions.sync.SetViewDistance;
+
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
-import java.util.Set;
-
 import static me.lxct.bestviewdistance.functions.data.Variable.*;
-import static me.lxct.bestviewdistance.functions.hooks.WorldGuardHook.getPlayerRegions;
 import static me.lxct.bestviewdistance.functions.util.Scheduler.scheduleSync;
 
 public class BVDPlayer {
@@ -95,37 +93,40 @@ public class BVDPlayer {
 
     public int getCurrentMaxLimit() {
         final FileConfiguration config = BestViewDistance.plugin.getConfig();
-        final Set<ProtectedRegion> regions = getPlayerRegions(this);
-        if(regions != null) {
+        
+        if (WorldGuardHook.isEnabled) {
             int tmp = max;
-            for (final ProtectedRegion r : regions) {
-                final String name = r.getId();
+
+            for (String name : WorldGuardHook.getPlayerRegions(this)) {
                 if (config.isInt("Regions." + name + ".Max")) {
                     tmp = Math.max(tmp, config.getInt("Regions." + name + ".Max"));
                 }
             }
-            return tmp;
         }
+
         final String worldName = this.p.getWorld().getName();
         if (config.isInt("Worlds." + worldName + ".Max")) {
             return config.getInt("Worlds." + worldName + ".Max");
         }
+
         return max;
     }
 
     private int getCurrentMinLimit() {
         final FileConfiguration config = BestViewDistance.plugin.getConfig();
-        final Set<ProtectedRegion> regions = getPlayerRegions(this);
-        if(regions != null) {
+        
+        if (WorldGuardHook.isEnabled) {
             int tmp = min;
-            for (final ProtectedRegion r : regions) {
-                final String name = r.getId();
+
+            for (String name : WorldGuardHook.getPlayerRegions(this)) {
                 if (config.isInt("Regions." + name + ".Min")) {
                     tmp = Math.min(tmp, config.getInt("Regions." + name + ".Min"));
                 }
             }
+
             return tmp;
         }
+
         final String worldName = this.p.getWorld().getName();
         if (config.isInt("Worlds." + worldName + ".Min")) {
             return config.getInt("Worlds." + worldName + ".Min");
