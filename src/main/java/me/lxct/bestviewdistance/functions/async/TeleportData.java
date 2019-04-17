@@ -1,8 +1,8 @@
 package me.lxct.bestviewdistance.functions.async;
 
-import me.lxct.bestviewdistance.BestViewDistance;
 import me.lxct.bestviewdistance.functions.BVDPlayer;
-import me.lxct.bestviewdistance.functions.sync.SetViewDistance;
+import me.lxct.bestviewdistance.functions.sync.IncrementallySetViewDistance;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -29,8 +29,7 @@ public class TeleportData implements Runnable {
             player.setWaitingForTpUnset(false); // Remove waiting
         }
 
-        scheduleSync(new SetViewDistance(p, player.getScheduledViewDistance()), teleportUnsetDelay * 20, player);
+        scheduleSync(new IncrementallySetViewDistance(p, player.getScheduledViewDistance()), teleportUnsetDelay * 20, player);
         player.setWaitingForTpUnset(true);
-        Bukkit.getScheduler().runTaskLaterAsynchronously(BestViewDistance.plugin, new UnsetTeleport(p), teleportUnsetDelay * 20); // Force unset teleport
     }
 }

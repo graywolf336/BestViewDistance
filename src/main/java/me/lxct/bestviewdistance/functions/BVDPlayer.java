@@ -2,7 +2,7 @@ package me.lxct.bestviewdistance.functions;
 
 import me.lxct.bestviewdistance.BestViewDistance;
 import me.lxct.bestviewdistance.functions.hooks.WorldGuardHook;
-import me.lxct.bestviewdistance.functions.sync.SetViewDistance;
+import me.lxct.bestviewdistance.functions.sync.IncrementallySetViewDistance;
 
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -204,7 +204,7 @@ public class BVDPlayer {
 
     public void setViewDistance(final int viewDistance) {
         if (!serverVersion.contains("1.8")) {
-            scheduleSync(new SetViewDistance(this.p, viewDistance)); // Break Async chain
+            scheduleSync(new IncrementallySetViewDistance(this.p, viewDistance)); // Break Async chain
         }
     }
 

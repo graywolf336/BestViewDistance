@@ -22,6 +22,8 @@ public class Scheduler {
     }
 
     public static void scheduleSync(Runnable runnable, int delay, BVDPlayer player) {
+        if (player == null) return;
+
         final int task = Bukkit.getScheduler().scheduleSyncDelayedTask(BestViewDistance.plugin, runnable, delay); // Break Async chain
         if (task == -1 && useTasks) {
             Bukkit.getScheduler().runTaskLater(BestViewDistance.plugin, runnable, delay); // Break Async chain
@@ -31,6 +33,8 @@ public class Scheduler {
     }
 
     public static void scheduleSync(Runnable runnable, BVDPlayer player) {
+        if (player == null) return;
+
         final int task = Bukkit.getScheduler().scheduleSyncDelayedTask(BestViewDistance.plugin, runnable); // Break Async chain
         if (task == -1 && useTasks) {
             Bukkit.getScheduler().runTask(BestViewDistance.plugin, runnable); // Break Async chain

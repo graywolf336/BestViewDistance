@@ -15,7 +15,7 @@ import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import static me.lxct.bestviewdistance.functions.data.Variable.*;
 
 public class OnTeleport implements Listener {
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onPlayerTeleport(PlayerTeleportEvent e) {
         Player p = e.getPlayer();
         if (p.hasMetadata("NPC")) {

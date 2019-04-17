@@ -9,7 +9,7 @@ import static me.lxct.bestviewdistance.functions.data.Variable.onlinePlayers;
 public class UnsetTeleport implements Runnable {
     private final Player p;
 
-    UnsetTeleport(final Player p) {
+    public UnsetTeleport(final Player p) {
         this.p = p;
     }
 

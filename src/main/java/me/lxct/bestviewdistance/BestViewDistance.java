@@ -2,10 +2,11 @@ package me.lxct.bestviewdistance;
 
 import me.lxct.bestviewdistance.commands.ViewCommand;
 import me.lxct.bestviewdistance.event.*;
-import me.lxct.bestviewdistance.functions.async.AsyncUpdateChecker;
 import me.lxct.bestviewdistance.functions.util.Calculations;
 import me.lxct.bestviewdistance.functions.util.Checkers;
+
 import org.bstats.bukkit.Metrics;
+
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -97,9 +98,6 @@ public class BestViewDistance extends JavaPlugin {
         //noinspection unused
         final Metrics metrics = new Metrics(this); // METRICS
         //}
-        if (this.getConfig().getBoolean("Misc.CheckUpdates")) {
-            new AsyncUpdateChecker(this).checkForUpdate(); // Add AsyncUpdateChecker (Thx Benz56)
-        }
     }
 
     // Calculations

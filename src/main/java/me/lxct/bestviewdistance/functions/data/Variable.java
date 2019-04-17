@@ -28,6 +28,7 @@ public class Variable {
     public static int aping;
     public static int safePing;
     public static int teleportUnsetDelay;
+    public static int incrementalViewIncreaseDelay;
     public static int moreThanSettings;
     public static int decimalsTPS;
     public static int decimalsIndice;
@@ -113,6 +114,7 @@ public class Variable {
         onFlyingView = configYml.getInt("ViewDistance.OnFlying", 12);
         onTeleportView = configYml.getInt("ViewDistance.OnTeleport", 4);
         teleportUnsetDelay = configYml.getInt("Delay.UnsetTeleportViewDelay", 3);
+        incrementalViewIncreaseDelay = configYml.getInt("Delay.IncrementalViewIncreaseDelay", 1);
         rping = configYml.getInt("Settings.PingForReduction", 550);
         aping = configYml.getInt("Settings.PingForAugmentation", 90);
         moreThanSettings = configYml.getInt("ViewDistance.MoreThanSettings", 0);

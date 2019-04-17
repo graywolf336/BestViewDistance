@@ -5,7 +5,7 @@
 #
 # Donate: https://paypal.me/lxct
 
-Version: 2.5 # Version of the config file. Don't change this value.
+Version: 2.6 # Version of the config file. Don't change this value.
 
 Features: # UseTeleportView can increase lags.
   UseTPS: true # Increase/Decrease view in function of server's TPS (Reduction Indice = 0)
@@ -30,6 +30,7 @@ Delay: # Warning: A low value for SetViewDelay can increase lags and create ghos
   CalculationsDelay: 1 # Delay in seconds to actualize calculations
   SetViewDelay: 20 # Delay in seconds to actualize global view distance (Impact performances)
   UnsetTeleportViewDelay: 3 # Delay in seconds to unset the OnTeleport custom view (Impact performances)
+  IncrementalViewIncreaseDelay: 1 # The amount of seconds between view distance increments. Higher amounts will "appear" as lag to players.
   CheckFlyingDelay: 5 # Delay in seconds before set the OnFlying view distance
   AFKDelay: 90 # Delay in seconds before set the OnAFK view distance
 
@@ -50,7 +51,6 @@ Misc:
   DecimalsTPS: 2 # How many decimals for the %VDIST_DECIMAL_TPS% placeholder
   DecimalsIndice: 2 # How many decimals for the %VDIST_REDUCTION_INDICE_DECIMAL% placeholder
   HideVdistLine4: false # Hide the 4th line of the /vdist command
-  CheckUpdates: true # Check for updates
   Metrics: true # Send anonymous stats
 
 Worlds: # Custom Min and Max per worlds
