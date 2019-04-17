@@ -1,24 +1,30 @@
 package me.lxct.bestviewdistance.event;
 
 import me.lxct.bestviewdistance.functions.BVDPlayer;
+import me.lxct.bestviewdistance.functions.data.Variable;
+import me.lxct.bestviewdistance.functions.sync.IncrementallySetViewDistance;
+
+import static me.lxct.bestviewdistance.functions.data.Variable.teleportUnsetDelay;
+import static me.lxct.bestviewdistance.functions.util.Scheduler.scheduleSync;
+
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import static me.lxct.bestviewdistance.functions.data.Variable.*;
-
-
 public class OnJoin implements Listener {
-    @EventHandler(priority = EventPriority.MONITOR)
-    public static void onPlayerJoin(final PlayerJoinEvent e) {
-        final Player p = e.getPlayer();
-        onlinePlayers.put(p, new BVDPlayer(p));
-        if(useLoginView) {
-            p.setViewDistance(onLoginView);
-        } else {
-            p.setViewDistance(min);
-        }
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onPlayerJoin(final PlayerJoinEvent e) {
+        Player p = e.getPlayer();
+        
+        //Remove the old instance, if they had one
+        Variable.onlinePlayers.remove(p);
+
+        //Add the player back to being online
+        BVDPlayer data = new BVDPlayer(p);
+        Variable.onlinePlayers.put(p, data);
+
+        scheduleSync(new IncrementallySetViewDistance(p, Variable.useLoginView ? Variable.onLoginView : Variable.min), teleportUnsetDelay * 20, data);
     }
 }
