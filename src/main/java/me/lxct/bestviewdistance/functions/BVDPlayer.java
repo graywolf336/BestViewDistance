@@ -173,15 +173,15 @@ public class BVDPlayer {
     }
 
     // CHECK AND USE PERMISSIONS
-    public int getViewBypass(final int viewDistance) {
+    public int getViewBypassAmount(final int viewDistance) {
         if (usePermissions) {
             for (int i = 32; i >= 3; i--) { // Start at 32, to 3
-                // 3 4 5 6 7 8 9 10 ... 30 31 32
                 if (this.p.hasPermission("view.set." + i)) { // view.set.i is set
                     return i; // If he has permission, then return the number "after" the permission.
                 }
             }
         }
+
         return viewDistance; // If he doesn't have permissions, then return viewDistance.
     }
 
@@ -190,7 +190,7 @@ public class BVDPlayer {
     }
 
     // CHECK AND USE PERMISSIONS
-    public boolean isViewBypass() {
+    public boolean hasViewBypassPermission() {
         if (usePermissions) {
             for (int i = 32; i >= 3; i--) { // Start at 32, to 3
                 if (this.p.hasPermission("view.set." + i)) { // view.set.i is set
@@ -198,7 +198,8 @@ public class BVDPlayer {
                 }
             }
         }
-        return false; // If he doesn't have permissions, then return viewDistance.
+
+        return false;
     }
 
     public void setViewDistance(final int viewDistance) {

@@ -50,7 +50,7 @@ public class Calculations {
                     && useOnFlyingView) { // FLYING VIEW
                 player.setViewDistance(onFlyingView);
             } else if (!player.isWaitingForTpUnset()) {
-                final int vdistToApply = player.getViewBypass(player.getScheduledViewDistance());
+                final int vdistToApply = player.getViewBypassAmount(player.getScheduledViewDistance());
                 if (vdistToApply != player.getCurrentViewDistance()) {
                     player.setViewDistance(vdistToApply);
                 }

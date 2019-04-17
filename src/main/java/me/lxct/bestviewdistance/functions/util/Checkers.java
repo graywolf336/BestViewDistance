@@ -14,7 +14,7 @@ public class Checkers {
             final BVDPlayer player = new BVDPlayer(p);
             final Location location = player.getLocation(); // Get Location
 
-            if (player.isViewBypass() && permissionsBypassAFK) {
+            if (player.hasViewBypassPermission() && permissionsBypassAFK) {
                 if (location.equals(player.getAfkLocation()) && !player.isAfk()) { // If same position ...
                     player.setAfk(true); // SET AFK
                 } else { // If it's not the same position...
@@ -36,7 +36,7 @@ public class Checkers {
         for (final Player p : Bukkit.getServer().getOnlinePlayers()) { // Every players...
             final BVDPlayer player = new BVDPlayer(p);
 
-            if (player.isViewBypass() && permissionsBypassFlying) {
+            if (player.hasViewBypassPermission() && permissionsBypassFlying) {
                 if (p.isFlying()) { // If flying
                     if (!player.isFlying()) { // IF flying && not in the list
                         player.setFlying(true);
