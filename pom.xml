@@ -3,11 +3,12 @@
 	xmlns="http://maven.apache.org/POM/4.0.0"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
 	<groupId>me.lxct</groupId>
 	<artifactId>BestViewDistance</artifactId>
 	<version>12-SNAPSHOT</version>
 	<packaging>jar</packaging>
+	<name>Best View Distance</name>
+	<description>A plugin to dynamically set a player's view distance based upon the server's performance.</description>
 
 	<properties>
 		<!-- Encoding Properties -->
@@ -23,27 +24,32 @@
 			<id>papermc-repo</id>
 			<url>https://papermc.io/repo/repository/maven-public/</url>
 		</repository>
+
 		<!-- ProtocolLib Repo -->
 		<repository>
 			<id>dmulloy2-repo</id>
 			<url>http://repo.dmulloy2.net/nexus/repository/public/</url>
 		</repository>
+
 		<!-- Bstats Repo -->
 		<repository>
 			<id>codemc-repo</id>
 			<url>https://repo.codemc.org/repository/maven-public</url>
 		</repository>
+
 		<!-- Placeholder Repo -->
 		<repository>
 			<id>extendedclip-repo</id>
 			<url>http://repo.extendedclip.com/content/repositories/placeholderapi/</url>
 		</repository>
+
 		<!-- WorldGuard Repo -->
 		<repository>
 			<id>sk89q-repo</id>
 			<url>http://maven.sk89q.com/repo/</url>
 		</repository>
 	</repositories>
+
 	<dependencies>
 		<!-- Paperclip API -->
 		<dependency>
@@ -52,6 +58,7 @@
 			<version>1.13.2-R0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
+
 		<!-- ProtocolLib API -->
 		<dependency>
 			<groupId>com.comphenix.protocol</groupId>
@@ -59,6 +66,7 @@
 			<version>4.4.0</version>
 			<scope>provided</scope>
 		</dependency>
+
 		<!-- Placeholder API -->
 		<dependency>
 			<groupId>me.clip</groupId>
@@ -66,13 +74,15 @@
 			<version>2.9.2</version>
 			<scope>provided</scope>
 		</dependency>
-		<!-- WorldGuard API -->
+
+		<!-- WorldEdit API -->
 		<dependency>
 			<groupId>com.sk89q.worldedit</groupId>
 			<artifactId>worldedit-bukkit</artifactId>
 			<version>7.0.0-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
+
 		<!-- WorldGuard API -->
 		<dependency>
 			<groupId>com.sk89q.worldguard</groupId>
@@ -80,6 +90,7 @@
 			<version>7.0.0-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
+
 		<!-- BStats Metrics -->
 		<dependency>
 			<groupId>org.bstats</groupId>
@@ -88,6 +99,21 @@
 			<scope>compile</scope>
 		</dependency>
 	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>jenkins</id>
+			<activation>
+				<property>
+					<name>env.BUILD_NUMBER</name>
+				</property>
+			</activation>
+			<properties>
+				<project.build.number>${env.BUILD_NUMBER}</project.build.number>
+			</properties>
+		</profile>
+	</profiles>
+
 	<build>
 		<resources>
 			<resource>
@@ -103,12 +129,14 @@
 				<artifactId>maven-clean-plugin</artifactId>
 				<version>3.1.0</version>
 			</plugin>
+
 			<!-- Include resource files -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
 				<version>3.1.0</version>
 			</plugin>
+
 			<!-- Compile and include classes -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -119,6 +147,7 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+
 			<!-- Token replacement plugin -->
 			<plugin>
 				<groupId>com.google.code.maven-replacer-plugin</groupId>
@@ -142,6 +171,7 @@
 					</replacements>
 				</configuration>
 			</plugin>
+
 			<!-- Unit testing -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -152,24 +182,28 @@
 					<trimStackTrace>false</trimStackTrace>
 				</configuration>
 			</plugin>
+
 			<!-- Generate a jar containing classes and resources -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
 				<version>3.1.1</version>
 			</plugin>
+
 			<!-- Generate a jar containing the source javadoc -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>3.0.1</version>
 			</plugin>
+
 			<!-- Generate a jar containing the java sources -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
 				<version>3.0.1</version>
 			</plugin>
+
 			<!-- Generate a jar containing classes, resources and shaded libraries -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -205,12 +239,14 @@
 					</filters>
 				</configuration>
 			</plugin>
+
 			<!-- Install the jars as artifacts into the local repository -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-install-plugin</artifactId>
 				<version>2.5.2</version>
 			</plugin>
+
 			<!-- Deploy the jars as artifacts into the remote repository -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -223,12 +259,10 @@
 	<distributionManagement>
 		<repository>
 			<id>repo-release</id>
-			<name>Jail Releases</name>
 			<url>https://repo.craftyn.com/repository/internal/</url>
 		</repository>
 		<snapshotRepository>
 			<id>repo-snapshot</id>
-			<name>Jail Snapshots</name>
 			<url>https://repo.craftyn.com/repository/snapshots/</url>
 		</snapshotRepository>
 	</distributionManagement>
