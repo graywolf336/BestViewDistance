@@ -1,6 +1,9 @@
 # BestViewDistance
 A view distance plugin for Paper. Created to boost ping/tps and view distance.
 
+Dev Builds: [https://ci.craftyn.com/job/BestViewDistance/](https://ci.craftyn.com/job/BestViewDistance/)
+[![Build Status](https://ci.craftyn.com/job/BestViewDistance/badge/icon)](https://ci.craftyn.com/job/BestViewDistance/)
+
 ## How it works ?
 This plugin chooses the **best view distance for your players**.
 The **view distance** is calculated based on your ping and the **TPS of the server**.
@@ -30,8 +33,6 @@ Permission : "view.check"
 /vdist => Allows your players to see their own view distance. Need "view.info"
 /vping => Allows your players to see their own ping. Need "view.info"
 
-Permission for update checker : "view.update"
-
 Bypass algorithm : "view.set.x" (3 to 32)
 (Example : view.set.15 set a view dist of 15 chunks)
 Does not work with "*"/"*.*" permissions nodes !
@@ -46,42 +47,44 @@ Does not work with "*"/"*.*" permissions nodes !
 #
 # Donate: https://paypal.me/lxct
 
-Version: 2.2 # Version of the config file. Don't change this value.
+Version: 2.6 # Version of the config file. Don't change this value.
 
-Features:
+Features: # UseTeleportView can increase lags.
+  UseTPS: true # Increase/Decrease view in function of server's TPS (Reduction Indice = 0)
+  UsePing: true # The plugin will give a custom view distance for each players
   UseLoginView: true # Use a custom view on login
   UseAFKView: true # Use a custom view if the player is AFK.
-  UsePing: true # The plugin will give a custom view distance for each players
   UseTasks: true # Use tasks. Turn this off will reduce lags, but view distance will change slower.
   UseFlyingView: false # Use a custom view if the player is flying.
   UseTeleportView: false # Use a custom view on teleport. Can reduce freeze on teleport.
   UsePermissions: false # Enable permissions (view.set.x) to bypass algorithm.
 
-ViewDistance:
-  Min: 4 # Minimum view distance (Minimum: 3)
-  Max: 16 # Maximum view distance (Maximum: 32)
+ViewDistance: # Adjust that according to your needs
+  Min: 4 # Default minimum view distance (Minimum: 3)
+  Max: 16 # Default maximum view distance (Maximum: 32)
   OnLogin: 4 # View distance on login
   OnAFK: 3 # AFK view distance (If UseAFKView is on true)
   OnTeleport: 4 # View distance on teleport (If UseTeleportView is on true)
   OnFlying: 12 # View distance if flying (If UseFlyingView is on true)
   MoreThanSettings: 0 # Add x chunks more than player's settings.
 
-Delay:
+Delay: # Warning: A low value for SetViewDelay can increase lags and create ghost chunks!
   CalculationsDelay: 1 # Delay in seconds to actualize calculations
-  SetViewDelay: 5 # Delay in seconds to actualize global view distance
-  UnsetTeleportViewDelay: 3 # Delay in seconds to unset the OnTeleport custom view
+  SetViewDelay: 20 # Delay in seconds to actualize global view distance (Impact performances)
+  UnsetTeleportViewDelay: 3 # Delay in seconds to unset the OnTeleport custom view (Impact performances)
+  IncrementalViewIncreaseDelay: 1 # The amount of seconds between view distance increments. Higher amounts will "appear" as lag to players.
   CheckFlyingDelay: 5 # Delay in seconds before set the OnFlying view distance
   AFKDelay: 90 # Delay in seconds before set the OnAFK view distance
 
-Settings:
-  TpsLimit: 19.5 # Below: Decrease Reduction Indice // Over: Increase Reduction Indice.
+Settings: # Calculations settings
+  TpsLimit: 19.5 # Below: Decrease Reduction Indice || Over: Increase Reduction Indice.
   TpsChangeIndice: 0.01 # How much we had to increase/decrease the reduction indice. 0.01 = 1%
   MaxReductionIndice: 0.75 # Maximum Reduction Indice (0.75 = 75%)
   SafePing: 1 # Set this value to 0 for local hosting.
   PingForReduction: 550 # Ping required to decrease view distance
   PingForAugmentation: 90 # Ping required to increase view distance
 
-Permissions:
+Permissions: # Bypass settings
   BypassAFKView: true # Player with permissions (view.set.x) can bypass the "OnAFK" view.
   BypassTeleportView: true # Player with permissions (view.set.x) can bypass the "OnTeleport" view.
   BypassFlyingView: true # Player with permissions (view.set.x) can bypass the "OnFlying" view.
@@ -90,8 +93,23 @@ Misc:
   DecimalsTPS: 2 # How many decimals for the %VDIST_DECIMAL_TPS% placeholder
   DecimalsIndice: 2 # How many decimals for the %VDIST_REDUCTION_INDICE_DECIMAL% placeholder
   HideVdistLine4: false # Hide the 4th line of the /vdist command
-  CheckUpdates: true # Check for updates
   Metrics: true # Send anonymous stats
+
+Worlds: # Custom Min and Max per worlds
+  Example: # Name of your world
+    Max: 32 # Max value of world
+    Min: 16 # Min value of world
+  Example2: # Another Example.
+    Max: 8 # Max for Example2 World
+    Min: 3 # Min for Example2 World
+
+Regions: # Custom Min and Max per regions
+  Example: # Name of your region
+    Max: 32 # Max value of region
+    Min: 16 # Min value of region
+  Example2: # Another Example.
+    Max: 8 # Max for Example2 region
+    Min: 3 # Min for Example2 region
 ```
 
 + Messages.yml File.
@@ -111,19 +129,8 @@ Misc:
 Bash/Zsh linux terminal :
 
 ```
-git clone https://github.com/Lxct/BestViewDistance.git
+git clone https://github.com/graywolf336/BestViewDistance.git
 cd BestViewDistance
-sudo mvn clean install
+mvn clean install
 ```
 The jar is in the `target/` folder.
-
-## Contact
-Add me on Discord => Lxct#9971
-I'd like to hear your comments ! <3
-
-
-## Info
-Spigot Link: [https://www.spigotmc.org/resources/best-view-distance.61963/](https://www.spigotmc.org/resources/best-view-distance.61963/)
-Github Link: [https://github.com/Lxct/BestViewDistance](https://github.com/Lxct/BestViewDistance)
-Dev Builds: [https://ci.codemc.org/job/Lxct/job/BestViewDistance/](https://ci.codemc.org/job/Lxct/job/BestViewDistance/)
-[![Build Status](https://ci.codemc.org/job/Lxct/job/BestViewDistance/badge/icon)](https://ci.codemc.org/job/Lxct/job/BestViewDistance/)
