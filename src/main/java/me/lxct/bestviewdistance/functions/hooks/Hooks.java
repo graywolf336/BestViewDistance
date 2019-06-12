@@ -21,7 +21,7 @@ public class Hooks {
         // PLACEHOLDERAPI
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             try {
-                new PlaceholderAPIHook(plugin).hook();
+            	new PlaceholderAPIHook().register();
                 Bukkit.getLogger().info("[BestViewDistance] Successfully hooked into PlaceholderAPI!");
             } catch (NoClassDefFoundError ignored) {
             }
